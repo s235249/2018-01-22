@@ -57,9 +57,9 @@ public class AnnoPunteggio implements Comparable<AnnoPunteggio>{
 	public int compareTo(AnnoPunteggio o) {
 		
 		if (this.punteggio>o.getPunteggio())
-			return -1;
-		
 			return 1;
+		
+			return -1;
 	}
 	
 	

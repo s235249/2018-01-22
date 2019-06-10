@@ -5,10 +5,12 @@
 package it.polito.tdp.seriea;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.seriea.model.AnnoPunteggio;
 import it.polito.tdp.seriea.model.Model;
+import it.polito.tdp.seriea.model.Season;
 import it.polito.tdp.seriea.model.Team;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,6 +69,9 @@ public class SerieAController {
 
     @FXML
     void doTrovaCamminoVirtuoso(ActionEvent event) {
+    	List<Season> cammino= model.trovaCamminoVirtuoso();
+    	
+    	txtResult.appendText(cammino.toString());
 
     }
 

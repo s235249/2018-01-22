@@ -18,6 +18,10 @@ public class Model {
 	private List<Season> listaSeason;
 	private List<AnnoPunteggio> punteggiPerStagioni;
 	private SimpleDirectedWeightedGraph<Season,DefaultWeightedEdge> graph;
+	private List<Season> ottima;
+	int pv=0;
+	int y=0;
+	
 
 	public List<Team> getListTeam() {
 		
@@ -125,6 +129,61 @@ public class Model {
 		}
 		
 		return (incTot-outTot);
+	}
+
+	public List<Season> trovaCamminoVirtuoso() {
+	
+		ottima = new ArrayList<>();
+		List<Season> parziale= new ArrayList<>();
+		
+		y=0;
+		
+		parziale.add(punteggiPerStagioni.get(0).getS());
+		pv= punteggiPerStagioni.get(0).getPunteggio();
+		cerca(parziale);
+		
+		return ottima;
+		
+		
+	}
+	
+	public void cerca(List<Season> parziale) {
+		
+		if( parziale.size()>ottima.size())
+		{
+			this.ottima=new ArrayList<>(parziale);
+		}
+		
+		int i=0;
+		
+		for (AnnoPunteggio s: punteggiPerStagioni)
+		{
+			
+			if(s.getPunteggio() > pv && i>=y)
+			{
+				parziale.add(s.getS());
+				pv=s.getPunteggio();
+				y=i;
+				cerca(parziale);
+				
+			}
+			
+			else if (s.getPunteggio() <= pv && i>y)
+			{
+				parziale.clear();
+				parziale.add(s.getS());
+				pv= s.getPunteggio();
+				
+			}
+			
+			i++;
+		}
+		
+	
+		
+		
+		
+		
 	}
 	
 	
